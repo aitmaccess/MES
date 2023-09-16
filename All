@@ -100,6 +100,73 @@ END
 
 
 
+
+
+AREA SQUARE,CODE, READONLY
+
+ENTRY ; MARK FIRST INSTRUCTION TO EXECUTE
+
+LDR R0, =DATATABLE ; Load start address of Lookup table
+
+LDR R1,VALUE ; Load no whose square is to be find
+
+CMP R1,#1 ; check whether it is one 
+
+BEQ LOOP1 ; if one then return the first address value as square(1)=1
+
+LOOP2 ADD R0,R0,#4 ; if not increment the address location
+
+SUBS R1,R1,#1 ; decrement the value of the number
+
+CMP R1,#1 ; check whether it is 1, idea here is to check for the location
+
+BNE LOOP2 ; if not one then go to loop2 else for loop1
+
+LOOP1 LDR R2,[R0] ; store the result in r2
+
+HERE B HERE ; infinite loop 
+
+END ; MARK END OF FILE
+
+;Lookup table contains Squares of no’s from 0 to 10 (in hex)
+
+AREA DATATABLE, DATA, READONLY
+
+DCD 0X00000001;
+
+DCD 0X00000004;
+
+DCD 0X00000009;
+
+DCD 0X00000016;
+
+DCD 0X00000025;
+
+DCD 0X00000036;
+
+DCD 0X00000049;
+
+DCD 0X00000064;
+
+DCD 0X00000081;
+
+DCD 0X00000100;
+
+VALUE DCB 5
+
+ALIGN
+
+RESULT DCW 0
+
+END
+
+
+
+
+
+
+
+
 AREA LAR_SMAL, READONLY
 
 ENTRY 
